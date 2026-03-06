@@ -3,6 +3,13 @@ import { useEffect, useState } from 'react';
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
 
+    const handleNameClick = () => {
+        // Clear the session storage so intro shows again
+        sessionStorage.removeItem('hasSeenIntro');
+        // Reload the page to trigger intro
+        window.location.reload();
+    };
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 80);
@@ -20,7 +27,10 @@ export default function Navbar() {
                 }
       `}
         >
-            <div className={`font-serif font-bold tracking-[0.15em] text-lg uppercase cursor-pointer hover:-translate-y-[1px] transition-transform duration-300 ${scrolled ? 'text-brand-light' : ''}`}>
+            <div 
+                onClick={handleNameClick}
+                className={`font-serif font-bold tracking-[0.15em] text-lg uppercase cursor-pointer hover:-translate-y-[1px] transition-all duration-300 ${scrolled ? 'text-brand-light hover:text-brand-amber' : 'hover:text-brand-amber'}`}
+            >
                 Francisco Alesandroni
             </div>
 

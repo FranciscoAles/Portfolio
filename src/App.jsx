@@ -38,7 +38,7 @@ function App() {
       {showIntro && <Intro onComplete={handleIntroComplete} />}
       
       {/* Main Site Content */}
-      <div className={showIntro ? 'opacity-0 pointer-events-none' : 'opacity-100'}>
+      <div className={showIntro ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}>
         <Navbar />
         <main className="relative z-10">
           <Hero />

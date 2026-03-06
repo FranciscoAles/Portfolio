@@ -70,54 +70,59 @@ export default function Intro({ onComplete }) {
             opacity: 1,
             scale: 1,
             rotationY: 0,
-            duration: 0.6,
+            duration: 0.5,
             ease: 'back.out(1.7)'
         })
         .to(particles.children, {
             scale: 1,
             opacity: 1,
-            duration: 0.4,
+            duration: 0.3,
             stagger: 0.02,
             ease: 'back.out(1.2)'
         }, '-=0.3')
         // Quick pause
-        .to({}, { duration: 0.4 })
+        .to({}, { duration: 0.3 })
         // NAME EXPLODES!
         .to(name, {
             opacity: 0,
-            scale: 2.5,
-            duration: 0.3,
+            scale: 3,
+            duration: 0.25,
             ease: 'power2.in'
         })
-        // REAL PARTICLE EXPLOSION!
+        // MASSIVE PARTICLE EXPLOSION!
         .to(particles.children, {
-            scale: 3,
+            scale: 4,
             opacity: 0,
-            x: (i) => gsap.utils.random(-400, 400),
-            y: (i) => gsap.utils.random(-400, 400),
-            duration: 0.8,
-            stagger: 0.01,
+            x: (i) => gsap.utils.random(-600, 600),
+            y: (i) => gsap.utils.random(-600, 600),
+            duration: 0.6,
+            stagger: 0.005,
             ease: 'power2.out'
         }, '-=0.2')
-        // WHITE FLASH - Longer!
+        // DIP TO WHITE TRANSITION!
         .to(flash, {
             opacity: 1,
-            scale: 6,
-            duration: 0.4,
+            scale: 8,
+            duration: 0.3,
             ease: 'power2.in'
-        }, '-=0.3')
-        // Flash fades out revealing site - SMOOTH TRANSITION
+        }, '-=0.2')
+        // Hold white briefly
+        .to(flash, {
+            opacity: 1,
+            duration: 0.1
+        })
+        // White fades out revealing ENTIRE site
         .to(flash, {
             opacity: 0,
-            duration: 0.8,
+            duration: 0.5,
             ease: 'power2.out'
         })
-        // Container fades out DURING flash fade
+        // Container fades out DURING white fade
         .to(container, {
             opacity: 0,
-            duration: 0.6,
+            duration: 0.4,
             ease: 'power2.in'
-        }, '-=0.6');
+        }, '-=0.4');
 
         return () => {
             tl.kill();
@@ -134,18 +139,18 @@ export default function Intro({ onComplete }) {
             ref={containerRef}
             className="fixed inset-0 z-[9999] bg-brand-dark flex items-center justify-center overflow-hidden"
         >
-            {/* Particle explosion */}
+            {/* MASSIVE Particle explosion */}
             <div ref={particlesRef} className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                {[...Array(32)].map((_, i) => {
-                    const angle = (i / 32) * Math.PI * 2;
-                    const distance = 60 + (i % 3) * 30;
+                {[...Array(48)].map((_, i) => {
+                    const angle = (i / 48) * Math.PI * 2;
+                    const distance = 50 + (i % 4) * 25;
                     const x = Math.cos(angle) * distance;
                     const y = Math.sin(angle) * distance;
                     
                     return (
                         <div
                             key={i}
-                            className="absolute w-2 h-2 bg-brand-amber rounded-full"
+                            className="absolute w-2.5 h-2.5 bg-brand-amber rounded-full"
                             style={{
                                 left: '50%',
                                 top: '50%',
