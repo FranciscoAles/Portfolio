@@ -6,21 +6,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 const protocols = [
     {
-        step: '01',
-        title: 'Pre-production & Assets',
-        description: 'We architect the foundation. 3D modeling, asset gathering, and narrative blocking to establish the core visual language before a single frame is cut.',
+        title: 'Video Editing',
+        description: 'Transforming raw footage into compelling narratives through precise cuts, rhythmic pacing, and emotional storytelling using Premiere Pro and After Effects. I craft seamless transitions and maintain perfect continuity while enhancing the overall impact of your vision with industry-standard tools.',
         visual: 'geometric'
     },
     {
-        step: '02',
-        title: 'The Editing Protocol',
-        description: 'Applying rhythmic precision. We cut not just for continuity, but for emotional resonance, ensuring the pacing tightens the viewer\'s focus.',
+        title: 'Visual Effects',
+        description: 'Creating stunning visual elements that blend reality with imagination using After Effects and Photoshop. From particle systems and motion tracking to compositing and color grading, I bring impossible concepts to life with technical precision and artistic flair.',
         visual: 'scanner'
     },
     {
-        step: '03',
-        title: 'VFX & Final Polish',
-        description: 'Elevating the frame. Compositing, color grading, and telemetry mapping transform raw footage into a polished, cinematic digital instrument.',
+        title: '3D Animation',
+        description: 'Building immersive 3D worlds and animations from concept to completion using Blender and After Effects. I model, rig, and animate characters and environments, creating dynamic scenes that captivate audiences and push creative boundaries.',
         visual: 'waveform'
     }
 ];
@@ -114,16 +111,7 @@ export default function Protocol() {
     }, []);
 
     return (
-        <section id="protocol" ref={containerRef} className="relative pb-[100vh] z-30">
-            <div className="py-24 px-6 md:px-16 max-w-7xl mx-auto relative z-40">
-                <h2 className="font-sans font-bold uppercase tracking-widest text-brand-ocean text-sm md:text-base mb-2">
-                    Methodology
-                </h2>
-                <p className="drama-serif text-5xl md:text-6xl text-brand-light leading-tight mb-8">
-                    Sticky Stacking Archive
-                </p>
-            </div>
-
+        <section id="protocol" ref={containerRef} className="relative pb-[100vh] z-40">
             <div className="relative">
                 {protocols.map((protocol, index) => (
                     <div
@@ -134,9 +122,6 @@ export default function Protocol() {
                         <div className="w-full max-w-6xl bg-brand-dark/40 border border-brand-brown/50 rounded-[3rem] p-8 md:p-16 shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-12 backdrop-blur-xl overflow-hidden h-[75vh]">
 
                             <div className="flex-1 flex flex-col justify-center">
-                                <div className="font-mono text-xs md:text-sm text-brand-amber border border-brand-amber/30 rounded-full py-1 px-4 self-start mb-8 tracking-widest">
-                                    STEP // {protocol.step}
-                                </div>
                                 <h3 className="font-sans font-bold text-3xl md:text-5xl text-brand-light mb-6 leading-tight">
                                     {protocol.title}
                                 </h3>

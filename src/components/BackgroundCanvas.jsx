@@ -14,11 +14,43 @@ export default function BackgroundCanvas() {
 
         let mouse = { x: -1000, y: -1000, active: false };
 
+        // Initialize particles array
+        let particles = [];
+
         const resize = () => {
             width = window.innerWidth;
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
+            
+            // Recalculate particles based on new dimensions
+            const targetNumParticles = Math.min(50, (width * height) / 20000);
+            const currentNumParticles = particles.filter(p => !p.temporary).length;
+            
+            if (targetNumParticles > currentNumParticles) {
+                // Add more particles
+                for (let i = 0; i < targetNumParticles - currentNumParticles; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        size: Math.random() * 3 + 1,
+                        baseColor: Math.random() > 0.7 ? '#1F92EA' : (Math.random() > 0.5 ? '#E88821' : '#F3F6F4'),
+                        opacity: Math.random() * 0.3 + 0.1,
+                        pulsePhase: Math.random() * Math.PI * 2
+                    });
+                }
+            } else if (targetNumParticles < currentNumParticles) {
+                // Remove excess particles (keep temporary ones)
+                let removed = 0;
+                for (let i = particles.length - 1; i >= 0 && removed < (currentNumParticles - targetNumParticles); i--) {
+                    if (!particles[i].temporary) {
+                        particles.splice(i, 1);
+                        removed++;
+                    }
+                }
+            }
         };
         window.addEventListener('resize', resize);
         resize();
@@ -31,233 +63,163 @@ export default function BackgroundCanvas() {
         };
         const onMouseLeave = () => { mouse.active = false; };
 
-        window.addEventListener('mousemove', onMouseMove);
-        window.addEventListener('mouseleave', onMouseLeave);
-
-        // Shockwaves & Bursts
-        let shockwaves = [];
-        let bursts = [];
+        // Click ripples
+        let ripples = [];
 
         const onClick = (e) => {
-            shockwaves.push({ x: e.clientX, y: e.clientY, radius: 0, life: 1 });
-            // Explosion bursts
-            for (let i = 0; i < 80; i++) {
-                let angle = Math.random() * Math.PI * 2;
-                let speed = Math.random() * 8 + 2;
-                bursts.push({
+            ripples.push({
+                x: e.clientX,
+                y: e.clientY,
+                radius: 0,
+                maxRadius: 200,
+                life: 1,
+                color: Math.random() > 0.5 ? '#1F92EA' : '#E88821'
+            });
+            
+            // Spawn a few extra particles on click
+            for (let i = 0; i < 8; i++) {
+                let angle = (Math.PI * 2 / 8) * i + Math.random() * 0.5;
+                particles.push({
                     x: e.clientX,
                     y: e.clientY,
-                    vx: Math.cos(angle) * speed,
-                    vy: Math.sin(angle) * speed,
-                    life: 1 + Math.random() * 0.5,
-                    decay: Math.random() * 0.02 + 0.015,
-                    color: Math.random() > 0.6 ? '#1F92EA' : (Math.random() > 0.5 ? '#E88821' : '#F3F6F4'),
-                    size: Math.random() * 2.5 + 0.5
+                    vx: Math.cos(angle) * 3,
+                    vy: Math.sin(angle) * 3,
+                    size: Math.random() * 2 + 1,
+                    baseColor: Math.random() > 0.5 ? '#1F92EA' : '#E88821',
+                    opacity: 0.6,
+                    pulsePhase: Math.random() * Math.PI * 2,
+                    temporary: true
                 });
             }
         };
         window.addEventListener('mousedown', onClick);
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseleave', onMouseLeave);
 
-        // Particles (Flow Field) - less of them, but they are larger and much softer
-        let particles = [];
-        const numParticles = Math.min(800, (width * height) / 1500);
+        // Initialize particles after resize is defined
+        const numParticles = Math.min(50, (width * height) / 20000);
         for (let i = 0; i < numParticles; i++) {
             particles.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                vx: 0,
-                vy: 0,
-                size: Math.random() * 4 + 2, // Larger base size
-                baseColor: Math.random() > 0.8 ? '#1F92EA' : '#F3F6F4',
-                opacity: Math.random() * 0.15 + 0.02, // Very low opacity for a soft epic feel
-                pulsePhase: Math.random() * Math.PI * 2 // Give each a unique breathing cycle
-            });
-        }
-
-        // Ambient Nebulas (Large, very soft drifting color blobs)
-        let dustFields = [];
-        const numDust = Math.min(60, (width * height) / 10000); // Very few
-        for (let i = 0; i < numDust; i++) {
-            dustFields.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                size: Math.random() * 200 + 100, // Massive
-                opacity: Math.random() * 0.05 + 0.01,
-                speedY: Math.random() * -0.1 - 0.05,
-                twinkleSpeed: Math.random() * 0.005 + 0.001,
-                twinkleOffset: Math.random() * Math.PI * 2,
-                colorType: Math.random() > 0.5 ? 'ocean' : 'amber'
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 3 + 1,
+                baseColor: Math.random() > 0.7 ? '#1F92EA' : (Math.random() > 0.5 ? '#E88821' : '#F3F6F4'),
+                opacity: Math.random() * 0.3 + 0.1,
+                pulsePhase: Math.random() * Math.PI * 2
             });
         }
 
         const render = () => {
-            time += 0.005;
+            time += 0.01;
 
-            // Motion blur trail over a dark background
-            ctx.fillStyle = 'rgba(16, 16, 25, 0.25)'; // brand-dark with opacity
+            // Clear with dark background
+            ctx.fillStyle = 'rgba(16, 16, 25, 1)';
             ctx.fillRect(0, 0, width, height);
 
-            // Draw Flow Field Particles
-            for (let i = 0; i < particles.length; i++) {
+            // Draw particles
+            for (let i = particles.length - 1; i >= 0; i--) {
                 let p = particles[i];
 
-                // Flow field vector
-                let angle = Math.sin(p.x * 0.001 + time) * Math.cos(p.y * 0.001 + time) * Math.PI * 2;
-                p.vx += Math.cos(angle) * 0.05;
-                p.vy += Math.sin(angle) * 0.05;
+                // Gentle floating motion
+                p.x += p.vx + Math.sin(time + p.pulsePhase) * 0.2;
+                p.y += p.vy + Math.cos(time + p.pulsePhase) * 0.1;
 
-                // General upward drift
-                p.vy -= 0.02;
-
-                // Mouse interaction - modified to push away gently but still feel magical
+                // Mouse interaction - gentle attraction
                 if (mouse.active) {
                     let mdx = mouse.x - p.x;
                     let mdy = mouse.y - p.y;
                     let dist = Math.sqrt(mdx * mdx + mdy * mdy);
-                    if (dist < 300) { // Larger area of effect
-                        let force = (300 - dist) / 300;
-                        // Push away gently
-                        p.vx -= (mdx / dist) * force * 0.3;
-                        p.vy -= (mdy / dist) * force * 0.3;
-
-                        // Add slight swirling
-                        let angleToMouse = Math.atan2(mdy, mdx);
-                        p.vx += Math.cos(angleToMouse + Math.PI / 2) * force * 0.2;
-                        p.vy += Math.sin(angleToMouse + Math.PI / 2) * force * 0.2;
+                    if (dist < 200 && dist > 20) {
+                        let force = (200 - dist) / 200 * 0.02;
+                        p.vx += (mdx / dist) * force;
+                        p.vy += (mdy / dist) * force;
                     }
                 }
 
-                // Shockwave displacement
-                for (let sw of shockwaves) {
-                    let sdx = sw.x - p.x;
-                    let sdy = sw.y - p.y;
-                    let sdist = Math.sqrt(sdx * sdx + sdy * sdy);
-                    let diff = Math.abs(sdist - sw.radius);
-                    if (diff < 40) {
-                        let pull = (40 - diff) / 40;
-                        p.vx += (sdx / sdist) * pull * 2;
-                        p.vy += (sdy / sdist) * pull * 2;
+                // Apply friction
+                p.vx *= 0.99;
+                p.vy *= 0.99;
+
+                // Wrap around edges
+                if (p.x < -50) p.x = width + 50;
+                if (p.x > width + 50) p.x = -50;
+                if (p.y < -50) p.y = height + 50;
+                if (p.y > height + 50) p.y = -50;
+
+                // Handle temporary particles (from clicks)
+                if (p.temporary) {
+                    p.opacity -= 0.01;
+                    if (p.opacity <= 0) {
+                        particles.splice(i, 1);
+                        continue;
                     }
                 }
 
-                // Friction
-                p.vx *= 0.94;
-                p.vy *= 0.94;
+                // Gentle pulsing opacity
+                let dynamicOpacity = p.opacity + Math.sin(time * 2 + p.pulsePhase) * 0.1;
+                dynamicOpacity = Math.max(0.05, Math.min(0.6, dynamicOpacity));
 
-                p.x += p.vx;
-                p.y += p.vy;
-
-                // Wrap around
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
-
-                // Color & Draw
-                let dynamicOpacity = p.opacity + (Math.sin(time * 50 + p.pulsePhase) * 0.05); // Gentle pulse
-                dynamicOpacity = Math.max(0, Math.min(1, dynamicOpacity));
-
+                // Draw particle with soft glow
                 let r, g, b;
                 if (p.baseColor === '#1F92EA') { r = 31; g = 146; b = 234; }
+                else if (p.baseColor === '#E88821') { r = 232; g = 136; b = 33; }
                 else { r = 243; g = 246; b = 244; }
 
-                // Create a radial gradient for each particle to make them soft orbs instead of hard dots
-                let grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+                // Create soft gradient for each particle
+                let grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 2);
                 grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${dynamicOpacity})`);
+                grad.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${dynamicOpacity * 0.5})`);
                 grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
 
                 ctx.fillStyle = grad;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
                 ctx.fill();
             }
 
-            // Draw background massive ambient nebulas
-            for (let i = 0; i < dustFields.length; i++) {
-                let d = dustFields[i];
+            // Draw click ripples
+            for (let i = ripples.length - 1; i >= 0; i--) {
+                let ripple = ripples[i];
+                ripple.radius += 4;
+                ripple.life -= 0.02;
 
-                d.y += d.speedY;
-                if (d.y + d.size < 0) d.y = height + d.size;
-
-                let currentOpacity = d.opacity * (0.5 + 0.5 * Math.sin(time * d.twinkleSpeed * 100 + d.twinkleOffset));
-
-                // Mouse interaction - massive nebulas subtly drift away from mouse
-                let drawnX = d.x;
-                let drawnY = d.y;
-                if (mouse.active) {
-                    let mdx = mouse.x - d.x;
-                    let mdy = mouse.y - d.y;
-                    let dist = Math.sqrt(mdx * mdx + mdy * mdy);
-                    if (dist < 500) {
-                        let push = (500 - dist) / 500;
-                        drawnX -= (mdx / dist) * push * 50;
-                        drawnY -= (mdy / dist) * push * 50;
-                    }
+                if (ripple.life <= 0) {
+                    ripples.splice(i, 1);
+                    continue;
                 }
 
                 let r, g, b;
-                if (d.colorType === 'ocean') { r = 31; g = 146; b = 234; }
+                if (ripple.color === '#1F92EA') { r = 31; g = 146; b = 234; }
                 else { r = 232; g = 136; b = 33; }
 
-                let grad = ctx.createRadialGradient(drawnX, drawnY, 0, drawnX, drawnY, d.size);
-                grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${currentOpacity})`);
-                grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
-
-                ctx.fillStyle = grad;
+                ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${ripple.life * 0.6})`;
+                ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.arc(drawnX, drawnY, d.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            // Draw Bursts
-            for (let i = bursts.length - 1; i >= 0; i--) {
-                let b = bursts[i];
-                b.x += b.vx;
-                b.y += b.vy;
-                b.vx *= 0.95;
-                b.vy *= 0.95;
-                b.vy -= 0.05; // slight float up
-                b.life -= b.decay;
-
-                let hex = b.color;
-                let r, g, bb;
-                if (hex === '#1F92EA') { r = 31; g = 146; bb = 234; }
-                else if (hex === '#E88821') { r = 232; g = 136; bb = 33; }
-                else { r = 243; g = 246; bb = 244; }
-
-                ctx.fillStyle = `rgba(${r}, ${g}, ${bb}, ${b.life})`;
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
-                ctx.fill();
-
-                if (b.life <= 0) bursts.splice(i, 1);
-            }
-
-            // Draw Shockwaves
-            for (let i = shockwaves.length - 1; i >= 0; i--) {
-                let sw = shockwaves[i];
-                sw.radius += 12;
-                sw.life -= 0.03;
-
-                ctx.strokeStyle = `rgba(232, 136, 33, ${sw.life * 0.6})`; // Amber
-                ctx.lineWidth = 2 + (sw.life * 2);
-                ctx.beginPath();
-                ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+                ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
                 ctx.stroke();
 
-                if (sw.life <= 0) shockwaves.splice(i, 1);
+                // Inner glow
+                let grad = ctx.createRadialGradient(ripple.x, ripple.y, 0, ripple.x, ripple.y, ripple.radius);
+                grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${ripple.life * 0.1})`);
+                grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+                ctx.fill();
             }
 
-            // Mouse Nebula Glow
+            // Subtle mouse glow
             if (mouse.active) {
-                let gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 250);
-                gradient.addColorStop(0, 'rgba(31, 146, 234, 0.08)'); // Ocean, softer
-                gradient.addColorStop(0.3, 'rgba(232, 136, 33, 0.03)'); // Amber, softer
+                let gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 150);
+                gradient.addColorStop(0, 'rgba(31, 146, 234, 0.05)');
+                gradient.addColorStop(0.5, 'rgba(232, 136, 33, 0.02)');
                 gradient.addColorStop(1, 'rgba(16, 16, 25, 0)');
 
                 ctx.fillStyle = gradient;
                 ctx.beginPath();
-                ctx.arc(mouse.x, mouse.y, 250, 0, Math.PI * 2);
+                ctx.arc(mouse.x, mouse.y, 150, 0, Math.PI * 2);
                 ctx.fill();
             }
 

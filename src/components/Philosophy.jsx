@@ -44,7 +44,7 @@ export default function Philosophy() {
         <section
             id="philosophy"
             ref={containerRef}
-            className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-32"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden py-32 z-20"
         >
             <div className="relative z-10 max-w-5xl px-6 md:px-16 text-center text-content select-none pointer-events-none">
                 <div className="mb-12 md:mb-20">

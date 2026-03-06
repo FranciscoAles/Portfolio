@@ -21,17 +21,15 @@ export default function Navbar() {
       `}
         >
             <div className={`font-serif font-bold tracking-[0.15em] text-lg uppercase cursor-pointer hover:-translate-y-[1px] transition-transform duration-300 ${scrolled ? 'text-brand-light' : ''}`}>
-                Francisco.
+                Francisco Alesandroni
             </div>
 
             <div className="hidden md:flex gap-10 items-center font-sans text-xs uppercase tracking-widest font-semibold">
-                <a href="#capabilities" className={`${scrolled ? 'text-brand-ocean hover:text-brand-amber' : 'text-brand-light/70 hover:text-brand-light'} transition-colors duration-300 hover:-translate-y-[1px] transform`}>Capabilities</a>
-                <a href="#philosophy" className={`${scrolled ? 'text-brand-ocean hover:text-brand-amber' : 'text-brand-light/70 hover:text-brand-light'} transition-colors duration-300 hover:-translate-y-[1px] transform`}>Manifesto</a>
-                <a href="#protocol" className={`${scrolled ? 'text-brand-ocean hover:text-brand-amber' : 'text-brand-light/70 hover:text-brand-light'} transition-colors duration-300 hover:-translate-y-[1px] transform`}>Protocol</a>
+                {/* Navigation items removed as requested */}
             </div>
 
-            <a href="#contact" className="group relative overflow-hidden rounded-[2rem] font-sans text-sm font-bold tracking-wide px-8 py-3 transition-transform duration-300 hover:scale-[1.03] active:scale-95 bg-brand-amber text-brand-dark flex items-center justify-center">
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-brand-light">ENGAGE</span>
+            <a href="mailto:franciscoalesandroni@outlook.com" className="group relative overflow-hidden rounded-[2rem] font-sans text-sm font-bold tracking-wide px-8 py-3 transition-transform duration-300 hover:scale-[1.03] active:scale-95 bg-brand-amber text-brand-dark flex items-center justify-center">
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-brand-light">Let's Work Together</span>
                 <span className="absolute inset-0 bg-brand-ocean translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0 block"></span>
             </a>
         </nav>
