@@ -23,18 +23,6 @@ export default function Philosophy() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Background Image Parallax
-            gsap.to('.parallax-bg', {
-                yPercent: 30,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true,
-                },
-            });
-
             // Word Reveal Animation
             gsap.to('.word-reveal', {
                 y: 0,
@@ -56,18 +44,8 @@ export default function Philosophy() {
         <section
             id="philosophy"
             ref={containerRef}
-            className="relative min-h-[90vh] flex items-center justify-center bg-brand-dark overflow-hidden py-32"
+            className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-32"
         >
-            {/* Parallax Background */}
-            <div className="absolute inset-0 z-0 pointer-events-none opacity-20 mix-blend-screen isolate">
-                <img
-                    src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=2670&auto=format&fit=crop"
-                    alt="Abstract Organic Light"
-                    className="parallax-bg w-full h-[130%] object-cover object-center absolute top-[-15%]"
-                />
-                <div className="absolute inset-0 bg-brand-dark/50 mix-blend-multiply"></div>
-            </div>
-
             <div className="relative z-10 max-w-5xl px-6 md:px-16 text-center text-content">
                 <div className="mb-12 md:mb-20">
                     <SplitText

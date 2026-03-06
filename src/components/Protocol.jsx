@@ -114,7 +114,7 @@ export default function Protocol() {
     }, []);
 
     return (
-        <section id="protocol" ref={containerRef} className="relative pb-[100vh] bg-brand-dark z-30">
+        <section id="protocol" ref={containerRef} className="relative pb-[100vh] z-30">
             <div className="py-24 px-6 md:px-16 max-w-7xl mx-auto relative z-40">
                 <h2 className="font-sans font-bold uppercase tracking-widest text-brand-ocean text-sm md:text-base mb-2">
                     Methodology
@@ -131,7 +131,7 @@ export default function Protocol() {
                         ref={el => cardsRef.current[index] = el}
                         className="card-panel h-screen w-full flex items-center justify-center sticky top-0 px-6 md:px-16"
                     >
-                        <div className="w-full max-w-6xl bg-brand-dark/95 border border-brand-brown/50 rounded-[3rem] p-8 md:p-16 shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-12 backdrop-blur-3xl overflow-hidden h-[75vh]">
+                        <div className="w-full max-w-6xl bg-brand-dark/40 border border-brand-brown/50 rounded-[3rem] p-8 md:p-16 shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-12 backdrop-blur-xl overflow-hidden h-[75vh]">
 
                             <div className="flex-1 flex flex-col justify-center">
                                 <div className="font-mono text-xs md:text-sm text-brand-amber border border-brand-amber/30 rounded-full py-1 px-4 self-start mb-8 tracking-widest">

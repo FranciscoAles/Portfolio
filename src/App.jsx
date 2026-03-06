@@ -5,12 +5,14 @@ import Philosophy from './components/Philosophy';
 import Protocol from './components/Protocol';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
+import BackgroundCanvas from './components/BackgroundCanvas';
 
 function App() {
   return (
-    <div className="bg-brand-dark min-h-screen selection:bg-brand-ocean selection:text-brand-dark">
+    <div className="min-h-screen selection:bg-brand-ocean selection:text-brand-dark relative w-full overflow-hidden">
+      <BackgroundCanvas />
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Features />
         <Philosophy />

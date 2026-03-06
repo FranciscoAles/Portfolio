@@ -19,18 +19,6 @@ export default function Hero() {
             ref={containerRef}
             className="relative h-[100dvh] w-full flex flex-col justify-end pb-24 md:pb-32 px-6 md:px-16 clip-overflow"
         >
-            {/* Background Image & Overlays */}
-            <div className="absolute inset-0 z-0 select-none pointer-events-none">
-                <img
-                    src="https://images.unsplash.com/photo-1574717024653-61fd2cf6d44d?q=80&w=2670&auto=format&fit=crop"
-                    alt="Cinematic Editing Setup"
-                    className="w-full h-full object-cover object-center opacity-40 mix-blend-luminosity"
-                />
-                {/* Heavy Primary to Black Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-brand-ocean/20 mix-blend-multiply"></div>
-                <div className="absolute inset-0 bg-gradient-to-tr from-brand-dark via-transparent to-transparent"></div>
-            </div>
-
             {/* Content Layer */}
             <div className="relative z-10 max-w-4xl text-left">
                 <h1 className="flex flex-col gap-2 md:gap-4 mb-8">

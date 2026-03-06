@@ -230,7 +230,7 @@ function CursorProtocolScheduler() {
 
 export default function Features() {
     return (
-        <section id="capabilities" className="py-32 px-6 md:px-16 bg-brand-dark relative z-20">
+        <section id="capabilities" className="py-32 px-6 md:px-16 relative z-20">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-16">
                     <h2 className="font-sans font-bold uppercase tracking-widest text-brand-ocean text-sm md:text-base mb-4">

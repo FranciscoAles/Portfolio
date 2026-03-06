@@ -1,7 +1,7 @@
 export default function CTA() {
     return (
-        <section id="contact" className="py-32 px-6 md:px-16 bg-brand-dark relative z-20 mt-[-100vh]">
-            <div className="max-w-5xl mx-auto bg-brand-brown/10 border border-brand-brown/30 rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
+        <section id="contact" className="py-32 px-6 md:px-16 relative z-20 mt-[-100vh]">
+            <div className="max-w-5xl mx-auto bg-brand-brown/10 border border-brand-brown/30 rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl backdrop-blur-md">
 
                 {/* Subtle Background Glow */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-brand-amber/10 blur-[100px] rounded-full pointer-events-none"></div>
