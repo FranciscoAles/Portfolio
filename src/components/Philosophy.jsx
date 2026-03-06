@@ -44,29 +44,29 @@ export default function Philosophy() {
         <section
             id="philosophy"
             ref={containerRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden py-32 z-20"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-32 z-20"
         >
-            <div className="relative z-10 max-w-5xl px-6 md:px-16 text-center text-content select-none pointer-events-none">
-                <div className="mb-12 md:mb-20">
+            <div className="relative z-10 max-w-4xl md:max-w-5xl px-4 md:px-16 text-center text-content select-none pointer-events-none">
+                <div className="mb-8 md:mb-16">
                     <SplitText
                         text="Most editors focus on: assembling clips in a timeline."
-                        className="font-sans font-medium text-xl md:text-3xl text-brand-light/60 tracking-wide"
+                        className="font-sans font-medium text-lg md:text-2xl lg:text-3xl text-brand-light/60 tracking-wide"
                     />
                 </div>
 
                 <div>
                     <SplitText
                         text="We focus on:"
-                        className="font-sans font-bold text-3xl md:text-5xl text-brand-light mb-4 block"
+                        className="font-sans font-bold text-2xl md:text-4xl lg:text-5xl text-brand-light mb-4 block"
                     />
-                    <div className="mt-8">
+                    <div className="mt-6 md:mt-8">
                         <SplitText
                             text="crafting digital experiences that feel like "
-                            className="drama-serif text-5xl md:text-7xl lg:text-[6rem] text-brand-light leading-tight"
+                            className="drama-serif text-4xl md:text-6xl lg:text-7xl text-brand-light leading-tight"
                         />
                         <SplitText
                             text="cinema."
-                            className="drama-serif text-5xl md:text-7xl lg:text-[6rem] text-brand-amber leading-tight italic block mt-2"
+                            className="drama-serif text-4xl md:text-6xl lg:text-7xl text-brand-amber leading-tight italic block mt-2"
                         />
                     </div>
                 </div>

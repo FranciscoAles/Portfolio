@@ -18,18 +18,22 @@ export default function BackgroundCanvas() {
         let particles = [];
 
         const resize = () => {
+            const oldWidth = width;
+            const oldHeight = height;
+            
             width = window.innerWidth;
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
             
             // Recalculate particles based on new dimensions
-            const targetNumParticles = Math.min(50, (width * height) / 20000);
+            const targetNumParticles = Math.min(50, Math.floor((width * height) / 20000));
             const currentNumParticles = particles.filter(p => !p.temporary).length;
             
-            if (targetNumParticles > currentNumParticles) {
-                // Add more particles
-                for (let i = 0; i < targetNumParticles - currentNumParticles; i++) {
+            if (targetNumParticles > currentNumParticles || width > oldWidth || height > oldHeight) {
+                // Add more particles if needed or if window grew
+                const particlesToAdd = Math.max(targetNumParticles - currentNumParticles, Math.floor((width * height) / 50000));
+                for (let i = 0; i < particlesToAdd; i++) {
                     particles.push({
                         x: Math.random() * width,
                         y: Math.random() * height,

@@ -111,7 +111,7 @@ export default function Protocol() {
     }, []);
 
     return (
-        <section id="protocol" ref={containerRef} className="relative pb-[100vh] z-40">
+        <section id="protocol" ref={containerRef} className="relative pb-32 z-40">
             <div className="relative">
                 {protocols.map((protocol, index) => (
                     <div
@@ -119,18 +119,18 @@ export default function Protocol() {
                         ref={el => cardsRef.current[index] = el}
                         className="card-panel h-screen w-full flex items-center justify-center sticky top-0 px-6 md:px-16"
                     >
-                        <div className="w-full max-w-6xl bg-brand-dark/40 border border-brand-brown/50 rounded-[3rem] p-8 md:p-16 shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-12 backdrop-blur-xl overflow-hidden h-[75vh]">
+                        <div className="w-full max-w-4xl md:max-w-6xl bg-brand-dark/40 border border-brand-brown/50 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_20px_60px_rgba(0,0,0,0.8)] flex flex-col md:flex-row gap-8 md:gap-12 backdrop-blur-xl overflow-hidden h-[70vh] md:h-[75vh]">
 
                             <div className="flex-1 flex flex-col justify-center">
-                                <h3 className="font-sans font-bold text-3xl md:text-5xl text-brand-light mb-6 leading-tight">
+                                <h3 className="font-sans font-bold text-2xl md:text-4xl lg:text-5xl text-brand-light mb-4 md:mb-6 leading-tight">
                                     {protocol.title}
                                 </h3>
-                                <p className="font-sans text-brand-light/70 text-base md:text-lg max-w-md leading-relaxed">
+                                <p className="font-sans text-brand-light/70 text-sm md:text-base lg:text-lg max-w-md leading-relaxed">
                                     {protocol.description}
                                 </p>
                             </div>
 
-                            <div className="flex-1 bg-brand-dark border border-brand-brown/40 rounded-[2rem] overflow-hidden hidden md:block relative">
+                            <div className="flex-1 bg-brand-dark border border-brand-brown/40 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden hidden md:block relative h-40 md:h-auto">
                                 {protocol.visual === 'geometric' && <GeometricMotif />}
                                 {protocol.visual === 'scanner' && <ScannerMotif />}
                                 {protocol.visual === 'waveform' && <WaveformMotif />}
