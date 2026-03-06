@@ -21,7 +21,7 @@ export default function Hero() {
         >
             {/* Content Layer */}
             <div className="relative z-10 max-w-4xl text-left">
-                <h1 className="flex flex-col gap-2 md:gap-4 mb-8">
+                <h1 className="flex flex-col gap-2 md:gap-4 mb-8 select-none">
                     <span className="reveal-text font-sans font-bold uppercase tracking-widest text-brand-ocean text-sm md:text-base mb-2">
                         Francisco Alesandroni — Video Editor & VFX
                     </span>

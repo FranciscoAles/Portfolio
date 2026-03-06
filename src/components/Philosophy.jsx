@@ -46,7 +46,7 @@ export default function Philosophy() {
             ref={containerRef}
             className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-32"
         >
-            <div className="relative z-10 max-w-5xl px-6 md:px-16 text-center text-content">
+            <div className="relative z-10 max-w-5xl px-6 md:px-16 text-center text-content select-none pointer-events-none">
                 <div className="mb-12 md:mb-20">
                     <SplitText
                         text="Most editors focus on: assembling clips in a timeline."

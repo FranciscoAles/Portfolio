@@ -58,33 +58,35 @@ export default function BackgroundCanvas() {
         };
         window.addEventListener('mousedown', onClick);
 
-        // Particles (Flow Field)
+        // Particles (Flow Field) - less of them, but they are larger and much softer
         let particles = [];
-        const numParticles = Math.min(1000, (width * height) / 1200); // Scale with screen, fewer particles for less distraction
+        const numParticles = Math.min(800, (width * height) / 1500);
         for (let i = 0; i < numParticles; i++) {
             particles.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
                 vx: 0,
                 vy: 0,
-                size: Math.random() * 1.5 + 0.5,
+                size: Math.random() * 4 + 2, // Larger base size
                 baseColor: Math.random() > 0.8 ? '#1F92EA' : '#F3F6F4',
-                opacity: Math.random() * 0.3 + 0.05 // Lower base opacity
+                opacity: Math.random() * 0.15 + 0.02, // Very low opacity for a soft epic feel
+                pulsePhase: Math.random() * Math.PI * 2 // Give each a unique breathing cycle
             });
         }
 
-        // Slower background ambient stars/dust to fill empty space
+        // Ambient Nebulas (Large, very soft drifting color blobs)
         let dustFields = [];
-        const numDust = Math.min(800, (width * height) / 800);
+        const numDust = Math.min(60, (width * height) / 10000); // Very few
         for (let i = 0; i < numDust; i++) {
             dustFields.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                size: Math.random() * 1.5 + 0.2,
-                opacity: Math.random() * 0.4 + 0.1,
-                speedY: Math.random() * -0.2 - 0.05,
-                twinkleSpeed: Math.random() * 0.02 + 0.01,
-                twinkleOffset: Math.random() * Math.PI * 2
+                size: Math.random() * 200 + 100, // Massive
+                opacity: Math.random() * 0.05 + 0.01,
+                speedY: Math.random() * -0.1 - 0.05,
+                twinkleSpeed: Math.random() * 0.005 + 0.001,
+                twinkleOffset: Math.random() * Math.PI * 2,
+                colorType: Math.random() > 0.5 ? 'ocean' : 'amber'
             });
         }
 
@@ -152,47 +154,56 @@ export default function BackgroundCanvas() {
                 if (p.y > height) p.y = 0;
 
                 // Color & Draw
-                // Dynamically boost opacity if moving fast
-                let speedAvg = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-                let dynamicOpacity = Math.min(1, p.opacity + speedAvg * 0.1);
+                let dynamicOpacity = p.opacity + (Math.sin(time * 50 + p.pulsePhase) * 0.05); // Gentle pulse
+                dynamicOpacity = Math.max(0, Math.min(1, dynamicOpacity));
 
-                // Parse base color to apply opacity
                 let r, g, b;
                 if (p.baseColor === '#1F92EA') { r = 31; g = 146; b = 234; }
                 else { r = 243; g = 246; b = 244; }
 
-                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${dynamicOpacity})`;
+                // Create a radial gradient for each particle to make them soft orbs instead of hard dots
+                let grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+                grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${dynamicOpacity})`);
+                grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+
+                ctx.fillStyle = grad;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 ctx.fill();
             }
 
-            // Draw background ambient dust
+            // Draw background massive ambient nebulas
             for (let i = 0; i < dustFields.length; i++) {
                 let d = dustFields[i];
 
-                // Slow drift
                 d.y += d.speedY;
-                if (d.y < 0) d.y = height;
+                if (d.y + d.size < 0) d.y = height + d.size;
 
-                // Base opacity + twinkling
                 let currentOpacity = d.opacity * (0.5 + 0.5 * Math.sin(time * d.twinkleSpeed * 100 + d.twinkleOffset));
 
-                // Mouse interaction (very faint push away)
+                // Mouse interaction - massive nebulas subtly drift away from mouse
                 let drawnX = d.x;
                 let drawnY = d.y;
                 if (mouse.active) {
                     let mdx = mouse.x - d.x;
                     let mdy = mouse.y - d.y;
                     let dist = Math.sqrt(mdx * mdx + mdy * mdy);
-                    if (dist < 200) {
-                        let push = (200 - dist) / 200;
-                        drawnX -= (mdx / dist) * push * 15;
-                        drawnY -= (mdy / dist) * push * 15;
+                    if (dist < 500) {
+                        let push = (500 - dist) / 500;
+                        drawnX -= (mdx / dist) * push * 50;
+                        drawnY -= (mdy / dist) * push * 50;
                     }
                 }
 
-                ctx.fillStyle = `rgba(243, 246, 244, ${currentOpacity * 0.5})`;
+                let r, g, b;
+                if (d.colorType === 'ocean') { r = 31; g = 146; b = 234; }
+                else { r = 232; g = 136; b = 33; }
+
+                let grad = ctx.createRadialGradient(drawnX, drawnY, 0, drawnX, drawnY, d.size);
+                grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${currentOpacity})`);
+                grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+
+                ctx.fillStyle = grad;
                 ctx.beginPath();
                 ctx.arc(drawnX, drawnY, d.size, 0, Math.PI * 2);
                 ctx.fill();
