@@ -24,55 +24,218 @@ const protocols = [
 
 const GeometricMotif = () => (
     <div className="w-full h-full flex items-center justify-center relative">
-        <div className="absolute w-64 h-64 border-[1px] border-brand-brown rounded-full animate-[spin_20s_linear_infinite]"></div>
-        <div className="absolute w-48 h-48 border-[1px] border-dotted border-brand-ocean rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
-        <div className="absolute w-32 h-32 border-[2px] border-dashed border-brand-amber rounded-full animate-[spin_10s_linear_infinite]"></div>
-        <div className="w-16 h-16 bg-brand-dark border border-brand-brown flex items-center justify-center rounded-xl rotate-45">
-            <div className="w-4 h-4 bg-brand-ocean rounded-full animate-pulse"></div>
+        {/* Video Editing - Full Timeline with Multiple Clips & Cursor */}
+        <div className="absolute inset-2 flex flex-col justify-center">
+            {/* Multiple timeline tracks */}
+            <div className="relative h-6 mb-3">
+                <div className="absolute inset-0 bg-brand-brown/20 rounded"></div>
+                <div className="absolute left-4 top-1 w-24 h-4 bg-brand-ocean/70 rounded-sm"></div>
+                <div className="absolute left-32 top-1 w-32 h-4 bg-brand-amber/70 rounded-sm"></div>
+                <div className="absolute right-8 top-1 w-20 h-4 bg-brand-ocean/70 rounded-sm"></div>
+            </div>
+            <div className="relative h-6 mb-3">
+                <div className="absolute inset-0 bg-brand-brown/20 rounded"></div>
+                <div className="absolute left-8 top-1 w-28 h-4 bg-brand-amber/70 rounded-sm"></div>
+                <div className="absolute left-40 top-1 w-24 h-4 bg-brand-ocean/70 rounded-sm"></div>
+                <div className="absolute right-12 top-1 w-16 h-4 bg-brand-amber/70 rounded-sm"></div>
+            </div>
+            <div className="relative h-6 mb-3">
+                <div className="absolute inset-0 bg-brand-brown/20 rounded"></div>
+                <div className="absolute left-12 top-1 w-20 h-4 bg-brand-ocean/70 rounded-sm"></div>
+                <div className="absolute left-36 top-1 w-36 h-4 bg-brand-amber/70 rounded-sm"></div>
+                <div className="absolute right-4 top-1 w-24 h-4 bg-brand-ocean/70 rounded-sm"></div>
+            </div>
+            <div className="relative h-6">
+                <div className="absolute inset-0 bg-brand-brown/20 rounded"></div>
+                <div className="absolute left-6 top-1 w-32 h-4 bg-brand-amber/70 rounded-sm"></div>
+                <div className="absolute left-44 top-1 w-20 h-4 bg-brand-ocean/70 rounded-sm"></div>
+                <div className="absolute right-16 top-1 w-28 h-4 bg-brand-amber/70 rounded-sm"></div>
+            </div>
+            
+            {/* Moving playhead */}
+            <div className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)] animate-[cursorMove_8s_ease-in-out_infinite]">
+                <div className="absolute -top-2 -left-2 w-5 h-5 border-2 border-white rounded-full"></div>
+                <div className="absolute top-1/2 -left-8 w-6 h-0.5 bg-white/80 -translate-y-1/2"></div>
+            </div>
+            
+            {/* Time markers */}
+            <div className="absolute -top-6 left-0 right-0 flex justify-between text-xs text-brand-light/40 font-mono">
+                <span>00:00</span>
+                <span>00:30</span>
+                <span>01:00</span>
+                <span>01:30</span>
+                <span>02:00</span>
+            </div>
         </div>
+        <style>{`
+            @keyframes cursorMove {
+                0% { left: 0%; }
+                20% { left: 25%; }
+                40% { left: 45%; }
+                60% { left: 70%; }
+                80% { left: 90%; }
+                100% { left: 100%; }
+            }
+        `}</style>
     </div>
 );
 
 const ScannerMotif = () => (
-    <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden px-8">
-        <div className="grid grid-cols-12 grid-rows-6 gap-2 w-full h-48 opacity-20">
-            {Array.from({ length: 72 }).map((_, i) => (
-                <div key={i} className="bg-brand-brown w-full h-full rounded-[2px]"></div>
-            ))}
+    <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
+        {/* Visual Effects - Complex Layer System */}
+        <div className="absolute inset-4">
+            {/* Multiple overlapping layers */}
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-ocean/15 via-brand-amber/10 to-brand-brown/15 rounded-2xl transform rotate-2 animate-[layerFloat_6s_ease-in-out_infinite]"></div>
+            <div className="absolute inset-4 bg-gradient-to-tr from-brand-amber/15 via-brand-ocean/10 to-brand-light/15 rounded-xl transform -rotate-1 animate-[layerFloat_6s_ease-in-out_infinite_reverse]" style={{animationDelay: '1s'}}></div>
+            <div className="absolute inset-8 bg-gradient-to-bl from-brand-brown/15 via-brand-amber/10 to-brand-ocean/15 rounded-lg transform rotate-1 animate-[layerFloat_6s_ease-in-out_infinite]" style={{animationDelay: '2s'}}></div>
+            <div className="absolute inset-12 bg-gradient-to-tl from-brand-light/15 via-brand-brown/10 to-brand-amber/15 rounded-md transform -rotate-2 animate-[layerFloat_6s_ease-in-out_infinite_reverse]" style={{animationDelay: '3s'}}></div>
+            
+            {/* Layer blend modes */}
+            <div className="absolute top-8 left-8 w-32 h-20 bg-brand-ocean/20 rounded-lg transform rotate-12 animate-[pulse_4s_ease-in-out_infinite]"></div>
+            <div className="absolute bottom-8 right-8 w-28 h-16 bg-brand-amber/20 rounded-lg transform -rotate-6 animate-[pulse_4s_ease-in-out_infinite]" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-brand-brown/20 rounded-full animate-[pulse_4s_ease-in-out_infinite]" style={{animationDelay: '2s'}}></div>
+            
+            {/* Multiple cursors working on different layers */}
+            <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.9)] animate-[cursorLayer_5s_ease-in-out_infinite]">
+                <div className="absolute w-6 h-6 border border-white/40 rounded-full -top-1.5 -left-1.5 animate-ping"></div>
+            </div>
+            <div className="absolute w-2 h-2 bg-brand-amber rounded-full shadow-[0_0_8px_rgba(232,136,33,0.9)] animate-[cursorLayer2_5s_ease-in-out_infinite]" style={{animationDelay: '1.5s'}}></div>
+            <div className="absolute w-2.5 h-2.5 bg-brand-ocean rounded-full shadow-[0_0_10px_rgba(31,146,234,0.9)] animate-[cursorLayer3_5s_ease-in-out_infinite]" style={{animationDelay: '3s'}}></div>
+            
+            {/* Adjustment sliders */}
+            <div className="absolute top-4 right-4 w-2 h-20 bg-brand-brown/30 rounded-full overflow-hidden">
+                <div className="absolute bottom-0 w-full bg-brand-amber rounded-full animate-[sliderAdjust_3s_ease-in-out_infinite]"></div>
+            </div>
+            <div className="absolute bottom-4 left-4 w-2 h-20 bg-brand-brown/30 rounded-full overflow-hidden">
+                <div className="absolute top-0 w-full bg-brand-ocean rounded-full animate-[sliderAdjust_3s_ease-in-out_infinite_reverse]" style={{animationDelay: '1s'}}></div>
+            </div>
         </div>
-        <div className="absolute top-0 left-0 w-full h-[2px] bg-brand-amber shadow-[0_0_15px_#E88821] animate-[scan_3s_ease-in-out_infinite_alternate] z-10 box-border pointer-events-none"></div>
         <style>{`
-      @keyframes scan {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(12rem); }
-      }
-    `}</style>
+            @keyframes layerFloat {
+                0%, 100% { transform: translateY(0px) rotate(2deg); }
+                50% { transform: translateY(-8px) rotate(-2deg); }
+            }
+            @keyframes cursorLayer {
+                0% { left: 20%; top: 25%; }
+                25% { left: 65%; top: 35%; }
+                50% { left: 75%; top: 60%; }
+                75% { left: 35%; top: 70%; }
+                100% { left: 20%; top: 25%; }
+            }
+            @keyframes cursorLayer2 {
+                0% { left: 70%; top: 20%; }
+                25% { left: 30%; top: 40%; }
+                50% { left: 25%; top: 65%; }
+                75% { left: 60%; top: 75%; }
+                100% { left: 70%; top: 20%; }
+            }
+            @keyframes cursorLayer3 {
+                0% { left: 40%; top: 70%; }
+                25% { left: 75%; top: 50%; }
+                50% { left: 60%; top: 25%; }
+                75% { left: 25%; top: 30%; }
+                100% { left: 40%; top: 70%; }
+            }
+            @keyframes sliderAdjust {
+                0%, 100% { height: 30%; }
+                50% { height: 70%; }
+            }
+        `}</style>
     </div>
 );
 
 const WaveformMotif = () => (
-    <div className="w-full h-full flex items-center justify-center relative px-8">
-        <svg viewBox="0 0 400 100" className="w-full h-auto drop-shadow-[0_0_8px_rgba(31,146,234,0.6)]">
-            <path
-                d="M 0 50 L 100 50 L 120 20 L 150 90 L 180 10 L 210 80 L 230 50 L 400 50"
-                fill="transparent"
-                stroke="#1F92EA"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="path-anim"
-            />
-        </svg>
+    <div className="w-full h-full flex items-center justify-center relative">
+        {/* 3D Animation - Complex 3D Scene */}
+        <div className="absolute inset-0 flex items-center justify-center" style={{perspective: '1200px'}}>
+            {/* Multiple 3D objects */}
+            <div className="relative w-full h-full flex items-center justify-center">
+                {/* Main rotating cube */}
+                <div className="w-32 h-32 relative animate-[rotate3d_12s_linear_infinite]" style={{transformStyle: 'preserve-3d'}}>
+                    <div className="absolute w-32 h-32 border-2 border-brand-amber/50 bg-brand-amber/5" style={{transform: 'translateZ(64px)'}}></div>
+                    <div className="absolute w-32 h-32 border-2 border-brand-ocean/50 bg-brand-ocean/5" style={{transform: 'rotateY(90deg) translateZ(64px)'}}></div>
+                    <div className="absolute w-32 h-32 border-2 border-brand-brown/50 bg-brand-brown/5" style={{transform: 'rotateY(180deg) translateZ(64px)'}}></div>
+                    <div className="absolute w-32 h-32 border-2 border-brand-light/50 bg-brand-light/5" style={{transform: 'rotateY(-90deg) translateZ(64px)'}}></div>
+                    <div className="absolute w-32 h-32 border-2 border-brand-ocean/50 bg-brand-ocean/5" style={{transform: 'rotateX(90deg) translateZ(64px)'}}></div>
+                    <div className="absolute w-32 h-32 border-2 border-brand-amber/50 bg-brand-amber/5" style={{transform: 'rotateX(-90deg) translateZ(64px)'}}></div>
+                </div>
+                
+                {/* Secondary rotating tetrahedron */}
+                <div className="absolute w-20 h-20 animate-[rotateTetra_8s_linear_infinite]" style={{transformStyle: 'preserve-3d', left: '25%', top: '30%'}}>
+                    <div className="absolute w-20 h-20 border border-brand-ocean/60" style={{transform: 'rotateY(0deg) translateZ(40px)'}}></div>
+                    <div className="absolute w-20 h-20 border border-brand-amber/60" style={{transform: 'rotateY(120deg) translateZ(40px)'}}></div>
+                    <div className="absolute w-20 h-20 border border-brand-brown/60" style={{transform: 'rotateY(240deg) translateZ(40px)'}}></div>
+                </div>
+                
+                {/* Orbiting sphere */}
+                <div className="absolute w-16 h-16 border-2 border-brand-light/60 rounded-full animate-[orbitSphere_10s_linear_infinite]" style={{right: '20%', top: '25%'}}></div>
+                
+                {/* Grid floor */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 opacity-30">
+                    <div className="w-full h-full bg-gradient-to-t from-brand-brown/20 to-transparent" style={{transform: 'rotateX(70deg) translateZ(-100px)'}}></div>
+                    <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(brand-brown/20 1px, transparent 1px), linear-gradient(90deg, brand-brown/20 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
+                </div>
+                
+                {/* Multiple 3D cursors */}
+                <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,1)] animate-[cursor3D_7s_ease-in-out_infinite]">
+                    <div className="absolute w-8 h-8 border-2 border-white/40 rounded-full -top-2.5 -left-2.5 animate-ping"></div>
+                </div>
+                <div className="absolute w-2 h-2 bg-brand-amber rounded-full shadow-[0_0_10px_rgba(232,136,33,1)] animate-[cursor3D2_7s_ease-in-out_infinite]" style={{animationDelay: '2s'}}></div>
+                <div className="absolute w-2.5 h-2.5 bg-brand-ocean rounded-full shadow-[0_0_12px_rgba(31,146,234,1)] animate-[cursor3D3_7s_ease-in-out_infinite]" style={{animationDelay: '4s'}}></div>
+                
+                {/* Particle effects */}
+                {[...Array(8)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="absolute w-1 h-1 bg-brand-amber rounded-full animate-[particle3D_4s_ease-in-out_infinite]"
+                        style={{
+                            left: `${20 + (i * 10)}%`,
+                            top: `${30 + (i * 5)}%`,
+                            animationDelay: `${i * 0.5}s`
+                        }}
+                    />
+                ))}
+            </div>
+        </div>
         <style>{`
-      .path-anim {
-        stroke-dasharray: 600;
-        stroke-dashoffset: 600;
-        animation: dash 3s linear infinite;
-      }
-      @keyframes dash {
-        to { stroke-dashoffset: 0; }
-      }
-    `}</style>
+            @keyframes rotate3d {
+                0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+                100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+            }
+            @keyframes rotateTetra {
+                0% { transform: rotateX(0deg) rotateY(0deg); }
+                100% { transform: rotateX(360deg) rotateY(360deg); }
+            }
+            @keyframes orbitSphere {
+                0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+                100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+            }
+            @keyframes cursor3D {
+                0% { left: 20%; top: 30%; transform: translateZ(50px); }
+                25% { left: 70%; top: 20%; transform: translateZ(-30px); }
+                50% { left: 75%; top: 65%; transform: translateZ(40px); }
+                75% { left: 30%; top: 70%; transform: translateZ(-50px); }
+                100% { left: 20%; top: 30%; transform: translateZ(50px); }
+            }
+            @keyframes cursor3D2 {
+                0% { left: 60%; top: 60%; transform: translateZ(-40px); }
+                25% { left: 25%; top: 40%; transform: translateZ(30px); }
+                50% { left: 40%; top: 25%; transform: translateZ(-20px); }
+                75% { left: 70%; top: 50%; transform: translateZ(40px); }
+                100% { left: 60%; top: 60%; transform: translateZ(-40px); }
+            }
+            @keyframes cursor3D3 {
+                0% { left: 35%; top: 70%; transform: translateZ(20px); }
+                25% { left: 65%; top: 55%; transform: translateZ(-40px); }
+                50% { left: 50%; top: 30%; transform: translateZ(30px); }
+                25% { left: 25%; top: 45%; transform: translateZ(-30px); }
+                100% { left: 35%; top: 70%; transform: translateZ(20px); }
+            }
+            @keyframes particle3D {
+                0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+                50% { transform: translateY(-20px) scale(1.5); opacity: 1; }
+            }
+        `}</style>
     </div>
 );
 
