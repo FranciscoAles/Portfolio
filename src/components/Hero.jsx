@@ -15,18 +15,13 @@ export default function Hero() {
     }, []);
 
     return (
-        <section
-            ref={containerRef}
-            className="relative h-[100dvh] w-full flex items-center justify-center px-6 md:px-16"
-        >
-            {/* Video Container */}
-            <div className="reveal-video relative w-full max-w-6xl aspect-video rounded-lg overflow-hidden shadow-2xl">
+        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div className="relative z-10 w-full h-full flex items-center justify-center">
                 <iframe
                     src="https://www.youtube.com/embed/oKkQcwaRiW0?autoplay=0&mute=0&playsinline=1&loop=1&playlist=oKkQcwaRiW0&controls=1&modestbranding=1&rel=0"
                     title="Francisco Alesandroni Showreel"
-                    className="absolute inset-0 w-full h-full"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    className="reveal-video w-full max-w-5xl aspect-video rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                 />
             </div>

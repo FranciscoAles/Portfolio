@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/favicon-dark.png" sizes="96x96" id="favicon" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -12,6 +12,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Francisco Alesandroni - Video Editor & VFX Artist. Cinematic portfolio." />
     <title>Francisco Alesandroni | Video Editor & VFX Artist</title>
+    
+    <script>
+      // Favicon switching based on browser theme
+      function updateFavicon() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const favicon = document.getElementById('favicon');
+        
+        if (isDark) {
+          // Dark mode: use light favicon
+          favicon.href = '/favicon-light.png';
+        } else {
+          // Light mode: use dark favicon
+          favicon.href = '/favicon-dark.png';
+        }
+      }
+      
+      // Initial check
+      updateFavicon();
+      
+      // Listen for theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
+    </script>
   </head>
   <body class="bg-[#101019] text-[#F3F6F4]">
     <div id="root"></div>
