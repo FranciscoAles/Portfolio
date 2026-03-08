@@ -1,4 +1,16 @@
+import { useState, useEffect } from 'react';
+
 export default function Footer() {
+    const [gifLoaded, setGifLoaded] = useState(false);
+    const [gifError, setGifError] = useState(false);
+
+    useEffect(() => {
+        const img = new Image();
+        img.onload = () => setGifLoaded(true);
+        img.onerror = () => setGifError(true);
+        img.src = '/GIF.gif';
+    }, []);
+
     return (
         <footer className="bg-[#0a0a0f] pt-16 pb-8 px-6 md:px-16 rounded-t-[3rem] border-t border-brand-brown/50 relative z-50 mt-8 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8 mb-8">
@@ -37,27 +49,18 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Logo GIF */}
+                {/* Logo GIF with fallback */}
                 <div className="col-span-1 md:col-span-7 flex items-center justify-center">
-                    <div className="w-full max-w-sm rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)] bg-brand-dark/20 min-h-[200px] flex items-center justify-center">
-                        <img 
-                            src="/GIF.gif" 
-                            alt="Francisco Alesandroni Logo" 
-                            className="w-full h-full rounded-2xl object-cover"
-                            loading="lazy"
-                            onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.parentElement.style.background = 'transparent';
-                            }}
-                            onLoad={() => {
-                                // Hide placeholder when GIF loads
-                                const parent = document.getElementById('gif-placeholder');
-                                if (parent) parent.style.display = 'none';
-                            }}
-                        />
-                        <div id="gif-placeholder" className="absolute inset-0 flex items-center justify-center text-brand-light/40 text-sm">
-                            <!-- Loading... -->
-                        </div>
+                    <div className="w-full max-w-sm h-40 md:h-auto flex items-center justify-center">
+                        {gifLoaded && !gifError ? (
+                            <img 
+                                src="/GIF.gif" 
+                                alt="Francisco Alesandroni Logo" 
+                                className="w-full h-auto rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+                            />
+                        ) : (
+                            <div className="w-full h-32 rounded-2xl border border-brand-brown/20 bg-brand-dark/20"></div>
+                        )}
                     </div>
                 </div>
             </div>
