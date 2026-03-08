@@ -39,11 +39,26 @@ export default function Footer() {
 
                 {/* Logo GIF */}
                 <div className="col-span-1 md:col-span-7 flex items-center justify-center">
-                    <img 
-                        src="/GIF.gif" 
-                        alt="Francisco Alesandroni Logo" 
-                        className="w-full max-w-sm rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
-                    />
+                    <div className="w-full max-w-sm rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)] bg-brand-dark/20 min-h-[200px] flex items-center justify-center">
+                        <img 
+                            src="/GIF.gif" 
+                            alt="Francisco Alesandroni Logo" 
+                            className="w-full h-full rounded-2xl object-cover"
+                            loading="lazy"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.parentElement.style.background = 'transparent';
+                            }}
+                            onLoad={() => {
+                                // Hide placeholder when GIF loads
+                                const parent = document.getElementById('gif-placeholder');
+                                if (parent) parent.style.display = 'none';
+                            }}
+                        />
+                        <div id="gif-placeholder" className="absolute inset-0 flex items-center justify-center text-brand-light/40 text-sm">
+                            <!-- Loading... -->
+                        </div>
+                    </div>
                 </div>
             </div>
 

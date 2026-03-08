@@ -52,8 +52,8 @@ const GeometricMotif = () => (
                 <div className="absolute right-16 top-1 w-28 h-4 bg-brand-amber/70 rounded-sm"></div>
             </div>
             
-            {/* Moving playhead */}
-            <div className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)] animate-[cursorMove_8s_ease-in-out_infinite]">
+            {/* Moving playhead - simplified for mobile */}
+            <div className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)] hidden md:block animate-[cursorMove_8s_ease-in-out_infinite]">
                 <div className="absolute -top-2 -left-2 w-5 h-5 border-2 border-white rounded-full"></div>
                 <div className="absolute top-1/2 -left-8 w-6 h-0.5 bg-white/80 -translate-y-1/2"></div>
             </div>
@@ -84,30 +84,22 @@ const ScannerMotif = () => (
     <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
         {/* Visual Effects - Complex Layer System */}
         <div className="absolute inset-4">
-            {/* Multiple overlapping layers */}
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-ocean/15 via-brand-amber/10 to-brand-brown/15 rounded-2xl transform rotate-2 animate-[layerFloat_6s_ease-in-out_infinite]"></div>
-            <div className="absolute inset-4 bg-gradient-to-tr from-brand-amber/15 via-brand-ocean/10 to-brand-light/15 rounded-xl transform -rotate-1 animate-[layerFloat_6s_ease-in-out_infinite_reverse]" style={{animationDelay: '1s'}}></div>
-            <div className="absolute inset-8 bg-gradient-to-bl from-brand-brown/15 via-brand-amber/10 to-brand-ocean/15 rounded-lg transform rotate-1 animate-[layerFloat_6s_ease-in-out_infinite]" style={{animationDelay: '2s'}}></div>
-            <div className="absolute inset-12 bg-gradient-to-tl from-brand-light/15 via-brand-brown/10 to-brand-amber/15 rounded-md transform -rotate-2 animate-[layerFloat_6s_ease-in-out_infinite_reverse]" style={{animationDelay: '3s'}}></div>
+            {/* Multiple overlapping layers - simplified for mobile */}
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-ocean/15 via-brand-amber/10 to-brand-brown/15 rounded-2xl transform rotate-2 hidden md:block animate-[layerFloat_6s_ease-in-out_infinite]"></div>
+            <div className="absolute inset-4 bg-gradient-to-tr from-brand-amber/15 via-brand-ocean/10 to-brand-light/15 rounded-xl transform -rotate-1 hidden md:block animate-[layerFloat_6s_ease-in-out_infinite_reverse]" style={{animationDelay: '1s'}}></div>
             
-            {/* Layer blend modes */}
-            <div className="absolute top-8 left-8 w-32 h-20 bg-brand-ocean/20 rounded-lg transform rotate-12 animate-[pulse_4s_ease-in-out_infinite]"></div>
-            <div className="absolute bottom-8 right-8 w-28 h-16 bg-brand-amber/20 rounded-lg transform -rotate-6 animate-[pulse_4s_ease-in-out_infinite]" style={{animationDelay: '1s'}}></div>
-            <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-brand-brown/20 rounded-full animate-[pulse_4s_ease-in-out_infinite]" style={{animationDelay: '2s'}}></div>
+            {/* Layer blend modes - simplified for mobile */}
+            <div className="absolute top-8 left-8 w-32 h-20 bg-brand-ocean/20 rounded-lg transform rotate-12 hidden md:block animate-[pulse_4s_ease-in-out_infinite]"></div>
+            <div className="absolute bottom-8 right-8 w-28 h-16 bg-brand-amber/20 rounded-lg transform -rotate-6 hidden md:block animate-[pulse_4s_ease-in-out_infinite]" style={{animationDelay: '1s'}}></div>
             
-            {/* Multiple cursors working on different layers */}
-            <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.9)] animate-[cursorLayer_5s_ease-in-out_infinite]">
+            {/* Multiple cursors working on different layers - simplified for mobile */}
+            <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.9)] hidden md:block animate-[cursorLayer_5s_ease-in-out_infinite]">
                 <div className="absolute w-6 h-6 border border-white/40 rounded-full -top-1.5 -left-1.5 animate-ping"></div>
             </div>
-            <div className="absolute w-2 h-2 bg-brand-amber rounded-full shadow-[0_0_8px_rgba(232,136,33,0.9)] animate-[cursorLayer2_5s_ease-in-out_infinite]" style={{animationDelay: '1.5s'}}></div>
-            <div className="absolute w-2.5 h-2.5 bg-brand-ocean rounded-full shadow-[0_0_10px_rgba(31,146,234,0.9)] animate-[cursorLayer3_5s_ease-in-out_infinite]" style={{animationDelay: '3s'}}></div>
             
-            {/* Adjustment sliders */}
-            <div className="absolute top-4 right-4 w-2 h-20 bg-brand-brown/30 rounded-full overflow-hidden">
+            {/* Adjustment sliders - desktop only */}
+            <div className="absolute top-4 right-4 w-2 h-20 bg-brand-brown/30 rounded-full overflow-hidden hidden md:block">
                 <div className="absolute bottom-0 w-full bg-brand-amber rounded-full animate-[sliderAdjust_3s_ease-in-out_infinite]"></div>
-            </div>
-            <div className="absolute bottom-4 left-4 w-2 h-20 bg-brand-brown/30 rounded-full overflow-hidden">
-                <div className="absolute top-0 w-full bg-brand-ocean rounded-full animate-[sliderAdjust_3s_ease-in-out_infinite_reverse]" style={{animationDelay: '1s'}}></div>
             </div>
         </div>
         <style>{`
@@ -121,20 +113,6 @@ const ScannerMotif = () => (
                 50% { left: 75%; top: 60%; }
                 75% { left: 35%; top: 70%; }
                 100% { left: 20%; top: 25%; }
-            }
-            @keyframes cursorLayer2 {
-                0% { left: 70%; top: 20%; }
-                25% { left: 30%; top: 40%; }
-                50% { left: 25%; top: 65%; }
-                75% { left: 60%; top: 75%; }
-                100% { left: 70%; top: 20%; }
-            }
-            @keyframes cursorLayer3 {
-                0% { left: 40%; top: 70%; }
-                25% { left: 75%; top: 50%; }
-                50% { left: 60%; top: 25%; }
-                75% { left: 25%; top: 30%; }
-                100% { left: 40%; top: 70%; }
             }
             @keyframes sliderAdjust {
                 0%, 100% { height: 30%; }
@@ -150,44 +128,43 @@ const WaveformMotif = () => (
         <div className="absolute inset-0 flex items-center justify-center" style={{perspective: '1200px'}}>
             {/* Multiple 3D objects */}
             <div className="relative w-full h-full flex items-center justify-center">
-                {/* Main rotating cube */}
-                <div className="w-32 h-32 relative animate-[rotate3d_12s_linear_infinite]" style={{transformStyle: 'preserve-3d'}}>
+                {/* Main rotating cube - simplified for mobile */}
+                <div className="w-32 h-32 relative hidden md:block animate-[rotate3d_12s_linear_infinite]" style={{transformStyle: 'preserve-3d'}}>
                     <div className="absolute w-32 h-32 border-2 border-brand-amber/50 bg-brand-amber/5" style={{transform: 'translateZ(64px)'}}></div>
                     <div className="absolute w-32 h-32 border-2 border-brand-ocean/50 bg-brand-ocean/5" style={{transform: 'rotateY(90deg) translateZ(64px)'}}></div>
                     <div className="absolute w-32 h-32 border-2 border-brand-brown/50 bg-brand-brown/5" style={{transform: 'rotateY(180deg) translateZ(64px)'}}></div>
                     <div className="absolute w-32 h-32 border-2 border-brand-light/50 bg-brand-light/5" style={{transform: 'rotateY(-90deg) translateZ(64px)'}}></div>
-                    <div className="absolute w-32 h-32 border-2 border-brand-ocean/50 bg-brand-ocean/5" style={{transform: 'rotateX(90deg) translateZ(64px)'}}></div>
-                    <div className="absolute w-32 h-32 border-2 border-brand-amber/50 bg-brand-amber/5" style={{transform: 'rotateX(-90deg) translateZ(64px)'}}></div>
                 </div>
                 
-                {/* Secondary rotating tetrahedron */}
-                <div className="absolute w-20 h-20 animate-[rotateTetra_8s_linear_infinite]" style={{transformStyle: 'preserve-3d', left: '25%', top: '30%'}}>
+                {/* Simple static cube for mobile */}
+                <div className="w-24 h-24 border-2 border-brand-amber/50 bg-brand-amber/10 rounded-lg md:hidden"></div>
+                
+                {/* Secondary rotating tetrahedron - desktop only */}
+                <div className="absolute w-20 h-20 hidden md:block animate-[rotateTetra_8s_linear_infinite]" style={{transformStyle: 'preserve-3d', left: '25%', top: '30%'}}>
                     <div className="absolute w-20 h-20 border border-brand-ocean/60" style={{transform: 'rotateY(0deg) translateZ(40px)'}}></div>
                     <div className="absolute w-20 h-20 border border-brand-amber/60" style={{transform: 'rotateY(120deg) translateZ(40px)'}}></div>
                     <div className="absolute w-20 h-20 border border-brand-brown/60" style={{transform: 'rotateY(240deg) translateZ(40px)'}}></div>
                 </div>
                 
-                {/* Orbiting sphere */}
-                <div className="absolute w-16 h-16 border-2 border-brand-light/60 rounded-full animate-[orbitSphere_10s_linear_infinite]" style={{right: '20%', top: '25%'}}></div>
+                {/* Orbiting sphere - desktop only */}
+                <div className="absolute w-16 h-16 border-2 border-brand-light/60 rounded-full hidden md:block animate-[orbitSphere_10s_linear_infinite]" style={{right: '20%', top: '25%'}}></div>
                 
-                {/* Grid floor */}
-                <div className="absolute bottom-0 left-0 right-0 h-32 opacity-30">
+                {/* Grid floor - desktop only */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 opacity-30 hidden md:block">
                     <div className="w-full h-full bg-gradient-to-t from-brand-brown/20 to-transparent" style={{transform: 'rotateX(70deg) translateZ(-100px)'}}></div>
                     <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(brand-brown/20 1px, transparent 1px), linear-gradient(90deg, brand-brown/20 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
                 </div>
                 
-                {/* Multiple 3D cursors */}
-                <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,1)] animate-[cursor3D_7s_ease-in-out_infinite]">
+                {/* Multiple 3D cursors - simplified for mobile */}
+                <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,1)] hidden md:block animate-[cursor3D_7s_ease-in-out_infinite]">
                     <div className="absolute w-8 h-8 border-2 border-white/40 rounded-full -top-2.5 -left-2.5 animate-ping"></div>
                 </div>
-                <div className="absolute w-2 h-2 bg-brand-amber rounded-full shadow-[0_0_10px_rgba(232,136,33,1)] animate-[cursor3D2_7s_ease-in-out_infinite]" style={{animationDelay: '2s'}}></div>
-                <div className="absolute w-2.5 h-2.5 bg-brand-ocean rounded-full shadow-[0_0_12px_rgba(31,146,234,1)] animate-[cursor3D3_7s_ease-in-out_infinite]" style={{animationDelay: '4s'}}></div>
                 
-                {/* Particle effects */}
+                {/* Particle effects - reduced for mobile */}
                 {[...Array(8)].map((_, i) => (
                     <div
                         key={i}
-                        className="absolute w-1 h-1 bg-brand-amber rounded-full animate-[particle3D_4s_ease-in-out_infinite]"
+                        className={`absolute w-1 h-1 bg-brand-amber rounded-full ${i < 4 ? 'animate-[particle3D_4s_ease-in-out_infinite]' : 'hidden md:block animate-[particle3D_4s_ease-in-out_infinite]'}`}
                         style={{
                             left: `${20 + (i * 10)}%`,
                             top: `${30 + (i * 5)}%`,
@@ -217,20 +194,6 @@ const WaveformMotif = () => (
                 75% { left: 30%; top: 70%; transform: translateZ(-50px); }
                 100% { left: 20%; top: 30%; transform: translateZ(50px); }
             }
-            @keyframes cursor3D2 {
-                0% { left: 60%; top: 60%; transform: translateZ(-40px); }
-                25% { left: 25%; top: 40%; transform: translateZ(30px); }
-                50% { left: 40%; top: 25%; transform: translateZ(-20px); }
-                75% { left: 70%; top: 50%; transform: translateZ(40px); }
-                100% { left: 60%; top: 60%; transform: translateZ(-40px); }
-            }
-            @keyframes cursor3D3 {
-                0% { left: 35%; top: 70%; transform: translateZ(20px); }
-                25% { left: 65%; top: 55%; transform: translateZ(-40px); }
-                50% { left: 50%; top: 30%; transform: translateZ(30px); }
-                25% { left: 25%; top: 45%; transform: translateZ(-30px); }
-                100% { left: 35%; top: 70%; transform: translateZ(20px); }
-            }
             @keyframes particle3D {
                 0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
                 50% { transform: translateY(-20px) scale(1.5); opacity: 1; }
@@ -248,29 +211,38 @@ export default function Protocol() {
         const ctx = gsap.context(() => {
             const cards = cardsRef.current;
 
-            cards.forEach((card, index) => {
-                if (index === cards.length - 1) return; // Last card doesn't get pushed back
+            // Use matchMedia to disable animations on mobile for better performance
+            const mm = gsap.matchMedia();
+            
+            mm.add("(min-width: 768px)", () => {
+                cards.forEach((card, index) => {
+                    if (index === cards.length - 1) return; // Last card doesn't get pushed back
 
-                ScrollTrigger.create({
-                    trigger: card,
-                    start: 'top top',
-                    endTrigger: cards[index + 1],
-                    end: 'top top',
-                    pin: true,
-                    pinSpacing: false,
-                    scrub: true,
-                    animation: gsap.to(card, {
-                        scale: 0.9,
-                        opacity: 0.4,
-                        filter: 'blur(10px)',
-                        ease: 'none'
-                    })
+                    ScrollTrigger.create({
+                        trigger: card,
+                        start: 'top top',
+                        endTrigger: cards[index + 1],
+                        end: 'top top',
+                        pin: true,
+                        pinSpacing: false,
+                        scrub: 1, // Reduce scrub for smoother performance
+                        animation: gsap.to(card, {
+                            scale: 0.9,
+                            opacity: 0.4,
+                            filter: 'blur(8px)', // Reduce blur for performance
+                            ease: 'none'
+                        })
+                    });
                 });
             });
 
         }, containerRef);
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            // Clean up matchMedia
+            gsap.matchMedia().clear();
+        };
     }, []);
 
     return (
