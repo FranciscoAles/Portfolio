@@ -7,17 +7,17 @@ gsap.registerPlugin(ScrollTrigger);
 const protocols = [
     {
         title: 'Video Editing',
-        description: 'Transforming raw footage into compelling narratives through precise cuts, rhythmic pacing, and emotional storytelling using Premiere Pro and After Effects. I craft seamless transitions and maintain perfect continuity while enhancing the overall impact of your vision with industry-standard tools.',
+        description: 'Transforming raw footage into compelling narratives through precise cuts, rhythmic pacing, and emotional storytelling using <a href="https://www.adobe.com/products/premiere.html" target="_blank" rel="noopener noreferrer" className="text-brand-amber hover:text-brand-amber/80 transition-colors underline decoration-brand-amber/30 hover:decoration-brand-amber/60">Premiere Pro</a> and <a href="https://www.adobe.com/products/aftereffects.html" target="_blank" rel="noopener noreferrer" className="text-brand-amber hover:text-brand-amber/80 transition-colors underline decoration-brand-amber/30 hover:decoration-brand-amber/60">After Effects</a>. I craft seamless transitions and maintain perfect continuity while enhancing the overall impact of your vision with industry-standard tools.',
         visual: 'geometric'
     },
     {
         title: 'Visual Effects',
-        description: 'Creating stunning visual elements that blend reality with imagination using After Effects and Photoshop. From particle systems and motion tracking to compositing and color grading, I bring impossible concepts to life with technical precision and artistic flair.',
+        description: 'Creating stunning visual elements that blend reality with imagination using <a href="https://www.adobe.com/products/aftereffects.html" target="_blank" rel="noopener noreferrer" className="text-brand-amber hover:text-brand-amber/80 transition-colors underline decoration-brand-amber/30 hover:decoration-brand-amber/60">After Effects</a> and <a href="https://www.adobe.com/products/photoshop.html" target="_blank" rel="noopener noreferrer" className="text-brand-amber hover:text-brand-amber/80 transition-colors underline decoration-brand-amber/30 hover:decoration-brand-amber/60">Photoshop</a>. From particle systems and motion tracking to compositing and color grading, I bring impossible concepts to life with technical precision and artistic flair.',
         visual: 'scanner'
     },
     {
         title: '3D Animation',
-        description: 'Building immersive 3D worlds and animations from concept to completion using Blender and After Effects. I model, rig, and animate characters and environments, creating dynamic scenes that captivate audiences and push creative boundaries.',
+        description: 'Building immersive 3D worlds and animations from concept to completion using <a href="https://www.blender.org/" target="_blank" rel="noopener noreferrer" className="text-brand-amber hover:text-brand-amber/80 transition-colors underline decoration-brand-amber/30 hover:decoration-brand-amber/60">Blender</a> and <a href="https://www.adobe.com/products/aftereffects.html" target="_blank" rel="noopener noreferrer" className="text-brand-amber hover:text-brand-amber/80 transition-colors underline decoration-brand-amber/30 hover:decoration-brand-amber/60">After Effects</a>. I model, rig, and animate characters and environments, creating dynamic scenes that captivate audiences and push creative boundaries.',
         visual: 'waveform'
     }
 ];
@@ -288,9 +288,10 @@ export default function Protocol() {
                                 <h3 className="font-sans font-bold text-2xl md:text-4xl lg:text-5xl text-brand-light mb-4 md:mb-6 leading-tight">
                                     {protocol.title}
                                 </h3>
-                                <p className="font-sans text-brand-light/70 text-sm md:text-base lg:text-lg max-w-md leading-relaxed">
-                                    {protocol.description}
-                                </p>
+                                <p 
+                                    className="font-sans text-brand-light/70 text-sm md:text-base lg:text-lg max-w-md leading-relaxed"
+                                    dangerouslySetInnerHTML={{ __html: protocol.description }}
+                                />
                             </div>
 
                             <div className="flex-1 bg-brand-dark border border-brand-brown/40 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden hidden md:block relative h-40 md:h-auto">

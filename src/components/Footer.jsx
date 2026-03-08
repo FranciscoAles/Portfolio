@@ -10,7 +10,7 @@ export default function Footer() {
                             Francisco Alesandroni
                         </h3>
                         <p className="font-sans text-brand-light/60 text-sm max-w-xs leading-relaxed">
-                            Video Editor & VFX Artist. Crafting digital instruments with cinematic precision.
+                            Video Editor but also just an overall pretty friendly, down to earth, cool guy. Shoot me an email and we'll figure out whatever you want to make happen.
                         </p>
                     </div>
 
@@ -40,7 +40,7 @@ export default function Footer() {
                 {/* Logo GIF */}
                 <div className="col-span-1 md:col-span-7 flex items-center justify-center">
                     <img 
-                        src="/Logo Gif.gif" 
+                        src="/GIF.gif" 
                         alt="Francisco Alesandroni Logo" 
                         className="w-full max-w-sm rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
                     />
