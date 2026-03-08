@@ -54,7 +54,7 @@ export default function Footer() {
                     <div className="w-full max-w-sm h-40 md:h-auto flex items-center justify-center">
                         {gifLoaded && !gifError ? (
                             <img 
-                                src="/GIF.gif" 
+                                src="/Optimized Gif.gif" 
                                 alt="Francisco Alesandroni Logo" 
                                 className="w-full h-auto rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
                             />
