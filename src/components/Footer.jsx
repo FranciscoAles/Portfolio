@@ -59,7 +59,11 @@ export default function Footer() {
                                 className="w-full h-auto rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
                             />
                         ) : (
-                            <div className="w-full h-32 rounded-2xl border border-brand-brown/20 bg-brand-dark/20"></div>
+                            <img 
+                                src="/Picture.png" 
+                                alt="Francisco Alesandroni Logo" 
+                                className="w-full h-auto rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+                            />
                         )}
                     </div>
                 </div>

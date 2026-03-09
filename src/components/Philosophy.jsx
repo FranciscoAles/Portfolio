@@ -61,7 +61,7 @@ export default function Philosophy() {
                     />
                     <div className="mt-6 md:mt-8">
                         <SplitText
-                            text="awesome cinematic digital storytelling expierences."
+                            text="awesome cinematic digital storytelling experiences."
                             className="drama-serif text-4xl md:text-6xl lg:text-7xl text-brand-light leading-tight"
                         />
                         <SplitText
