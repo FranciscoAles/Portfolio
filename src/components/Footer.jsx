@@ -82,7 +82,7 @@ export default function Footer() {
                 )}
             </div>
 
-            <div className="max-w-7xl mx-auto border-t border-brand-brown/30 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className={`max-w-7xl mx-auto border-t border-brand-brown/30 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 ${hasAnyImage ? '' : 'text-center'}`}>
                 <p className="font-mono text-[10px] text-brand-light/40 tracking-widest uppercase">
                     {new Date().getFullYear()} Francisco Alesandroni. All rights reserved.
                 </p>
