@@ -28,11 +28,11 @@ export default function Footer() {
 
                 {/* Brand Column */}
                 <div className={hasAnyImage ? 'col-span-1 md:col-span-5 flex flex-col justify-between' : ''}>
-                    <div>
+                    <div className={hasAnyImage ? '' : 'text-center'}>
                         <h3 className="font-serif font-bold tracking-widest text-xl uppercase text-brand-light mb-3">
                             Francisco Alesandroni
                         </h3>
-                        <p className="font-sans text-brand-light/60 text-sm max-w-xs leading-relaxed">
+                        <p className="font-sans text-brand-light/60 text-sm max-w-xs leading-relaxed mx-auto">
                             Video Editor but also just an overall pretty friendly, down to earth, cool guy. Shoot me an email and we'll figure out whatever you want to make happen.
                         </p>
                     </div>
