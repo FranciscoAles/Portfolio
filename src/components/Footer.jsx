@@ -3,20 +3,31 @@ import { useState, useEffect } from 'react';
 export default function Footer() {
     const [gifLoaded, setGifLoaded] = useState(false);
     const [gifError, setGifError] = useState(false);
+    const [pictureLoaded, setPictureLoaded] = useState(false);
+    const [pictureError, setPictureError] = useState(false);
 
     useEffect(() => {
-        const img = new Image();
-        img.onload = () => setGifLoaded(true);
-        img.onerror = () => setGifError(true);
-        img.src = '/GIF.gif';
+        // Preload GIF
+        const gifImg = new Image();
+        gifImg.onload = () => setGifLoaded(true);
+        gifImg.onerror = () => setGifError(true);
+        gifImg.src = '/Optimized Gif.gif';
+
+        // Preload Picture
+        const picImg = new Image();
+        picImg.onload = () => setPictureLoaded(true);
+        picImg.onerror = () => setPictureError(true);
+        picImg.src = '/Picture.png';
     }, []);
+
+    const hasAnyImage = (gifLoaded && !gifError) || (pictureLoaded && !pictureError);
 
     return (
         <footer className="bg-[#0a0a0f] pt-16 pb-8 px-6 md:px-16 rounded-t-[3rem] border-t border-brand-brown/50 relative z-50 mt-8 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8 mb-8">
+            <div className={`max-w-7xl mx-auto ${hasAnyImage ? 'grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8 mb-8' : 'text-center mb-8'}`}>
 
                 {/* Brand Column */}
-                <div className="col-span-1 md:col-span-5 flex flex-col justify-between">
+                <div className={hasAnyImage ? 'col-span-1 md:col-span-5 flex flex-col justify-between' : ''}>
                     <div>
                         <h3 className="font-serif font-bold tracking-widest text-xl uppercase text-brand-light mb-3">
                             Francisco Alesandroni
@@ -27,7 +38,7 @@ export default function Footer() {
                     </div>
 
                     {/* Social Links */}
-                    <div className="mt-8 flex items-center gap-6">
+                    <div className={`mt-8 flex items-center gap-6 ${hasAnyImage ? '' : 'justify-center'}`}>
                         <a 
                             href="https://www.linkedin.com/in/francisco-alesandroni-b173a9296" 
                             target="_blank" 
@@ -49,29 +60,31 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Logo GIF with fallback */}
-                <div className="col-span-1 md:col-span-7 flex items-center justify-center">
-                    <div className="w-full max-w-sm h-40 md:h-auto flex items-center justify-center">
-                        {gifLoaded && !gifError ? (
-                            <img 
-                                src="/Optimized Gif.gif" 
-                                alt="Francisco Alesandroni Logo" 
-                                className="w-full h-auto rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
-                            />
-                        ) : (
-                            <img 
-                                src="/Picture.png" 
-                                alt="Francisco Alesandroni Logo" 
-                                className="w-full h-auto rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
-                            />
-                        )}
+                {/* Logo/Image section - only show if any image loads */}
+                {hasAnyImage && (
+                    <div className="col-span-1 md:col-span-7 flex items-center justify-center">
+                        <div className="w-full max-w-sm h-40 md:h-auto flex items-center justify-center">
+                            {gifLoaded && !gifError ? (
+                                <img 
+                                    src="/Optimized Gif.gif" 
+                                    alt="Francisco Alesandroni Logo" 
+                                    className="w-full h-auto rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+                                />
+                            ) : (
+                                <img 
+                                    src="/Picture.png" 
+                                    alt="Francisco Alesandroni Logo" 
+                                    className="w-full h-auto rounded-2xl border border-brand-brown/30 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+                                />
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
 
             <div className="max-w-7xl mx-auto border-t border-brand-brown/30 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p className="font-mono text-[10px] text-brand-light/40 tracking-widest uppercase">
-                    © {new Date().getFullYear()} Francisco Alesandroni. All rights reserved.
+                    {new Date().getFullYear()} Francisco Alesandroni. All rights reserved.
                 </p>
             </div>
         </footer>
